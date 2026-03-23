@@ -1,0 +1,39 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="card auth-card shadow-lg">
+  <h2 class="text-center mb-4">Login</h2>
+  {% with messages = get_flashed_messages() %} {% for msg in messages %}
+  <div class="alert alert-warning text-center w-60 mx-auto">{{ msg }}</div>
+  {% endfor %} {% endwith %} 
+
+  <form method="POST">
+    <input
+      type="email"
+      name="email"
+      class="form-control mb-3"
+      placeholder="Email"
+      required
+    />
+
+    <input
+      type="password"
+      name="password"
+      class="form-control mb-3"
+      placeholder="Password"
+      required
+    />
+
+    <div class="form-check mb-3 text-start">
+      <input type="checkbox" class="form-check-input" name="remember" />
+      <label class="form-check-label">Remember Me</label>
+    </div>
+
+    <button class="btn btn-danger w-100">Login</button>
+  </form>
+
+  <p class="text-center mt-3">
+    <a href="/register">Create account</a>
+  </p>
+</div>
+
+{% endblock %}

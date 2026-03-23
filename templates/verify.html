@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="card auth-card">
+  <h2>Email Verification</h2>
+
+  {% with messages = get_flashed_messages() %} {% for msg in messages %}
+  <div class="alert alert-warning text-center w-60 mx-auto">{{ msg }}</div>
+  {% endfor %} {% endwith %}
+
+  <form method="POST">
+    <input
+      type="email"
+      name="email"
+      placeholder="Enter Email"
+      class="form-control mb-3"
+    />
+    <button class="btn btn-danger w-100">Verify</button>
+  </form>
+</div>
+
+{% endblock %}
