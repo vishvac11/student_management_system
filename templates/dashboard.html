@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | CampusDesk{% endblock %}
+{% block content %}
+<section class="dashboard-layout">
+  <div class="panel hero-dashboard">
+    <div>
+      <span class="eyebrow">Overview</span>
+      <h1>Welcome, {{ session.get("user_name") }}</h1>
+      <p>Live system summary and quick access.</p>
+    </div>
+    <div class="status-badge {% if g.current_user.is_verified %}verified{% else %}pending{% endif %}">
+      {% if g.current_user.is_verified %}Verified Account{% else %}Pending Verification{% endif %}
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <article class="panel stat-card">
+      <span>Total Users</span>
+      <strong>{{ stats.user_count }}</strong>
+      <p>Complete records stored in SQLite.</p>
+    </article>
+    <article class="panel stat-card">
+      <span>Verified Users</span>
+      <strong>{{ stats.verified_count }}</strong>
+      <p>Accounts that passed verification.</p>
+    </article>
+    <article class="panel stat-card">
+      <span>Total Students</span>
+      <strong>{{ stats.student_count }}</strong>
+      <p>Student records available in the management module.</p>
+    </article>
+    <article class="panel stat-card">
+      <span>Administrators</span>
+      <strong>{{ stats.admin_count }}</strong>
+      <p>Users with access to the admin panel.</p>
+    </article>
+  </div>
+
+  <div class="dashboard-grid">
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <span class="eyebrow">Shortcuts</span>
+          <h2>Go to</h2>
+        </div>
+      </div>
+
+      <div class="action-grid">
+        <a href="{{ url_for('profile') }}" class="action-card">
+          <h3>Edit Profile</h3>
+          <p>Update your personal details.</p>
+        </a>
+        <a href="{{ url_for('reset') }}" class="action-card">
+          <h3>Reset Password</h3>
+          <p>Change your account password.</p>
+        </a>
+        <a href="{{ url_for('students') }}" class="action-card">
+          <h3>Students</h3>
+          <p>Open the records module.</p>
+        </a>
+        {% if session.get("role") == "admin" %}
+        <a href="{{ url_for('admin') }}" class="action-card">
+          <h3>Admin Panel</h3>
+          <p>Manage users and access levels.</p>
+        </a>
+        {% endif %}
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <span class="eyebrow">Recent Users</span>
+          <h2>Latest accounts</h2>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in recent_users %}
+            <tr>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <td><span class="pill">{{ user.role|capitalize }}</span></td>
+              <td>
+                <span class="pill {% if user.is_verified %}pill-success{% else %}pill-warning{% endif %}">
+                  {% if user.is_verified %}Verified{% else %}Pending{% endif %}
+                </span>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</section>
+{% endblock %}

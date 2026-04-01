@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Edit User | CampusDesk{% endblock %}
+{% block content %}
+<section class="auth-layout single-focus">
+  <div class="auth-card wide-card">
+    <div class="card-head">
+      <span class="eyebrow">Edit User</span>
+      <h2>Update user details</h2>
+      <p>Change name, role, and status.</p>
+    </div>
+
+    <form method="POST" class="auth-form">
+      <div class="two-column">
+        <div>
+          <label>Full Name</label>
+          <input type="text" name="name" value="{{ user.name }}" required />
+        </div>
+        <div>
+          <label>Email Address</label>
+          <input type="email" value="{{ user.email }}" disabled />
+        </div>
+      </div>
+
+      <div class="two-column">
+        <div>
+          <label>Role</label>
+          <select name="role">
+            <option value="user" {% if user.role == "user" %}selected{% endif %}>User</option>
+            <option value="admin" {% if user.role == "admin" %}selected{% endif %}>Admin</option>
+          </select>
+        </div>
+        <div>
+          <label>Verification Status</label>
+          <select name="is_verified">
+            <option value="1" {% if user.is_verified %}selected{% endif %}>Verified</option>
+            <option value="0" {% if not user.is_verified %}selected{% endif %}>Pending</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-primary">Save User Changes</button>
+    </form>
+
+    <div class="helper-links centered-links">
+      <a href="{{ url_for('admin') }}">Back to admin panel</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
