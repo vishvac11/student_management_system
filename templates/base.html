@@ -2,21 +2,56 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Auth App</title>
-
-    <!-- Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}CampusDesk{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-
-    <!-- Custom CSS -->
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
-    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   </head>
   <body>
-    <div class="main-container">{% block content %}{% endblock %}</div>
+    <div class="page-shell">
+      <div class="bg-orb orb-one"></div>
+      <div class="bg-orb orb-two"></div>
+
+      {% if session.get("user_id") %}
+      <header class="topbar">
+        <a class="brand" href="{{ url_for('dashboard') }}">
+          <span class="brand-mark">A</span>
+          <span>
+            <strong>CampusDesk</strong>
+            <small>Student Records</small>
+          </span>
+        </a>
+
+        <nav class="topbar-nav">
+          <a href="{{ url_for('dashboard') }}">Dashboard</a>
+          <a href="{{ url_for('students') }}">Students</a>
+          <a href="{{ url_for('profile') }}">Profile</a>
+          {% if session.get("role") == "admin" %}
+          <a href="{{ url_for('admin') }}">Admin Panel</a>
+          {% endif %}
+          <a class="nav-logout" href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+      </header>
+      {% endif %}
+
+      <main class="{% block page_class %}content-wrap{% endblock %}">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <section class="flash-stack">
+              {% for category, message in messages %}
+              <div class="flash flash-{{ category }}">{{ message }}</div>
+              {% endfor %}
+            </section>
+          {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+      </main>
+    </div>
   </body>
 </html>
