@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}CampusDesk{% endblock %}</title>
+    <title>{% block title %}AuthFlow{% endblock %}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -22,18 +22,13 @@
         <a class="brand" href="{{ url_for('dashboard') }}">
           <span class="brand-mark">A</span>
           <span>
-            <strong>CampusDesk</strong>
-            <small>Student Records</small>
+            <strong>AuthFlow</strong>
+            <small>User Authentication</small>
           </span>
         </a>
 
         <nav class="topbar-nav">
           <a href="{{ url_for('dashboard') }}">Dashboard</a>
-          <a href="{{ url_for('students') }}">Students</a>
-          <a href="{{ url_for('profile') }}">Profile</a>
-          {% if session.get("role") == "admin" %}
-          <a href="{{ url_for('admin') }}">Admin Panel</a>
-          {% endif %}
           <a class="nav-logout" href="{{ url_for('logout') }}">Logout</a>
         </nav>
       </header>

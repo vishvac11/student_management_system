@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.db
+.venv/
+venv/
+env/
+.env
+task2.pdf
+task2_from_pdf.txt

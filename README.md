@@ -1,25 +1,15 @@
-# Student Management System
+# User Authentication System
 
-A Flask + SQLite web application for managing students with secure authentication, user roles, and admin controls.
+A Flask + SQLite authentication app built around the Task 2 requirements: signup, login, password hashing, session-based authentication, a protected dashboard, and logout.
 
 ## Features
 
-- User registration with password validation
-- Account verification flow (`/verify`) before login
-- Secure login/logout using hashed passwords
-- Password reset by email match (`/reset`)
-- Role-based access control (`admin` and `user`)
-- Student CRUD:
-  - Add student
-  - View/search students
-  - Edit student
-  - Delete student
-- Admin panel to manage users:
-  - View/search users
-  - Edit role/name/verification
-  - Delete users (except currently logged-in admin)
-- Dashboard with summary stats (users, verified users, admins, students)
-- Profile page for updating logged-in user name
+- User Registration (Signup)
+- User Login
+- Password Hashing using `generate_password_hash` and `check_password_hash`
+- Session-based Authentication
+- Protected Dashboard Page
+- Safe Logout Functionality
 
 ## Tech Stack
 
@@ -27,80 +17,57 @@ A Flask + SQLite web application for managing students with secure authenticatio
 - Flask
 - SQLite
 - Werkzeug security helpers
-- HTML templates + CSS
+- HTML, Jinja templates, and CSS
 
 ## Project Structure
 
 ```text
-student_management_system/
-├── app.py
-├── database.db
-├── static/
-│   └── style.css
-└── templates/
-    ├── base.html
-    ├── login.html
-    ├── register.html
-    ├── verify.html
-    ├── dashboard.html
-    ├── students.html
-    ├── edit_student.html
-    ├── admin.html
-    ├── edit_user.html
-    ├── profile.html
-    └── reset_password.html
-Setup and Run
-Clone the repository:
+user_auth_app/
+|-- app.py
+|-- database.db
+|-- requirements.txt
+|-- static/
+|   `-- style.css
+`-- templates/
+    |-- base.html
+    |-- dashboard.html
+    |-- login.html
+    `-- register.html
+```
 
-git clone <your-repo-url>
-cd student_management_system
-Create and activate virtual environment:
+## Setup
 
-Windows (PowerShell):
+1. Create and activate a virtual environment.
+2. Install dependencies:
 
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-macOS/Linux:
+```bash
+pip install -r requirements.txt
+```
 
-python3 -m venv venv
-source venv/bin/activate
-Install dependencies:
+3. Run the app:
 
-pip install flask werkzeug
-Run the app:
-
+```bash
 python app.py
-Open in browser:
+```
 
+4. Open:
+
+```text
 http://127.0.0.1:5000
-Default Admin Account
-The app auto-creates one admin account if no admin exists:
+```
 
-Email: admin@task3.local
-Password: Admin123
-After first login, update credentials/password for safety.
+## Main Routes
 
-Main Routes
-/register - Create new account
-/verify - Verify account
-/login - Login
-/dashboard - App stats
-/students - Student list + create/search
-/students/edit/<id> - Edit student
-/students/delete/<id> - Delete student
-/profile - Update profile
-/admin - User management (admin only)
-/edit/<id> - Edit user (admin only)
-/delete/<id> - Delete user (admin only)
-/reset - Reset password
-/logout - Logout
-Database
-SQLite file: database.db
+- `/register` - register a new user
+- `/login` - login page
+- `/dashboard` - main dashboard
+- `/logout` - logout
 
-Tables:
+## Database Table
 
-users
-id, name, email, password, role, is_verified, created_at
-students
-id, full_name, roll_number, course, year_level, email, phone, created_by, created_at
-### Author -- by Vishva ####
+### `users`
+
+- `id`
+- `name`
+- `email`
+- `password`

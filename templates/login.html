@@ -1,24 +1,24 @@
 {% extends "base.html" %}
-{% block title %}Login | CampusDesk{% endblock %}
+{% block title %}Login | AuthFlow{% endblock %}
 {% block content %}
 <section class="auth-layout">
   <div class="hero-panel">
-    <span class="eyebrow">Student Records Platform</span>
-    <h1>Manage student data with clarity and control.</h1>
-    <p>Secure access, clean workflows, and fast record management.</p>
+    <span class="eyebrow">Authentication Task</span>
+    <h1>Secure user access with a clean signup and login flow.</h1>
+    <p>This app demonstrates registration, password hashing, session-based authentication, a protected dashboard, and safe logout.</p>
 
     <div class="feature-grid">
       <article class="feature-card">
-        <h3>Protected Access</h3>
-        <p>Login-gated routes for authorized users.</p>
+        <h3>Signup</h3>
+        <p>Users can create accounts with validated credentials.</p>
       </article>
       <article class="feature-card">
-        <h3>Student CRUD</h3>
-        <p>Create, review, update, and remove records.</p>
+        <h3>Password Hashing</h3>
+        <p>Passwords are stored securely using Werkzeug hashing.</p>
       </article>
       <article class="feature-card">
-        <h3>Admin Control</h3>
-        <p>Manage users, roles, and verification status.</p>
+        <h3>Protected Dashboard</h3>
+        <p>Only logged-in users can access private pages.</p>
       </article>
     </div>
   </div>
@@ -47,12 +47,6 @@
 
     <div class="helper-links">
       <a href="{{ url_for('register') }}">Create a new account</a>
-      <a href="{{ url_for('verify') }}">Verify email</a>
-      <a href="{{ url_for('reset') }}">Forgot password?</a>
-    </div>
-
-    <div class="demo-note">
-      <strong>Admin:</strong> `admin@task3.local` / `Admin123`
     </div>
   </div>
 </section>
